@@ -46,21 +46,14 @@ const Hero = () => {
         .then((response) => {
           setWeather(response.data);
           setLoading(true);
+          setContainerStyle(`${styles.visible}`);
+          setLoaderStyle(`${styles.loader}`);
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-          setLoading(false);
         });
     }
     setCity("");
-  };
-
-  const handleOnClick = () => {
-    fetchWeather();
-    setContainerStyle(`${styles.visible}`);
-    setLoaderStyle(`${styles.loader}`);
   };
 
   return (
@@ -108,7 +101,9 @@ const Hero = () => {
 
             {/*Weather, more information about the current location */}
             <div className="flex flex-col py-8 pr-8">
-              <h2 className="font-semibold text-gray-400 text-lg">Weather Details</h2>
+              <h2 className="font-semibold text-gray-400 text-lg">
+                Weather Details
+              </h2>
               <div className="flex flex-col gap-4 py-8 border-gray-400 border-b">
                 <div className="flex justify-between">
                   <h3>Cloudy</h3>
@@ -146,7 +141,7 @@ const Hero = () => {
         </div>
         <Button
           className="grid place-content-center cursor-pointer"
-          onClick={handleOnClick}
+          onClick={fetchWeather}
         >
           <RiSearchLine size={22} color="gray" />
         </Button>
