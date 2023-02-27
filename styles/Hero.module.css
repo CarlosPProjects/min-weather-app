@@ -1,0 +1,15 @@
+.visible {
+  @apply opacity-100 duration-700 delay-200 ease-out;
+}
+
+.loader {
+  @apply hidden;
+}
+
+.visible .aside {
+  @apply translate-x-0 duration-700 delay-200 ease-out;
+}
+
+.visible .mainInfo {
+  @apply -translate-x-0 duration-700 delay-200 ease-out;
+}

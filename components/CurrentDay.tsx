@@ -28,13 +28,13 @@ const CurrentDay = () => {
   const day = days[currentDate.getDay()];
   const date = currentDate.getDate();
   const month = months[currentDate.getMonth()];
-  const year = currentDate.getFullYear().toString().slice(-2); 
+  const year = currentDate.getFullYear().toString().slice(-2);
   const time = currentDate.toLocaleTimeString();
 
   return (
     <div>
       <p>
-        {day}, {date} {month} {year}
+        {day}, {date} {month} ~{year}
       </p>
     </div>
   );

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <div className="absolute top-0 left-0 z-10">
+    <div className="absolute top-0 left-0 z-50">
       <Image
         src="/logo.png"
         width={100}

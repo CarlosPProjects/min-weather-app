@@ -1,5 +1,4 @@
 import { FC } from "react";
-import Header from "./Header";
 import CurrentDay from "./CurrentDay";
 import {
   BsCloudDrizzle,
@@ -55,7 +54,6 @@ const Weather: FC<Props> = ({ data }) => {
   }
   return (
     <>
-      <Header />
       <div className="flex items-end h-full p-8">
         <div className="flex items-end gap-6 p-16">
           <h1 className="text-8xl">{data.main.temp.toFixed(0)}&#176;</h1>

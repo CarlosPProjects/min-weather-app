@@ -3,7 +3,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import Button from "./Button";
+import Loader from "./Loader";
 import Weather from "./Weather";
+import Header from "./Header";
+import styles from "@/styles/Hero.module.css";
 
 interface WeatherData {
   main: {
@@ -32,43 +35,53 @@ const Hero = () => {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
-
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API}`;
+  const [containerStyle, setContainerStyle] = useState("");
+  const [loaderStyles, setLoaderStyle] = useState("");
 
-  const fetchWeather = (e: any) => {
-    e.preventDefault();
-    setLoading(true);
+  const fetchWeather = () => {
     if (city !== "") {
       axios
         .get<WeatherData>(url)
         .then((response) => {
           setWeather(response.data);
-          console.log(response.data);
+          setLoading(true);
         })
         .catch((error) => {
           console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
-    } else {
-      setLoading(false);
     }
-
     setCity("");
   };
 
+  const handleOnClick = () => {
+    fetchWeather();
+    setContainerStyle(`${styles.visible}`);
+    setLoaderStyle(`${styles.loader}`);
+  };
+
   return (
-    <div className="absolute top-0 left-0 bottom-0 right-0">
-      <Image
-        src="/assets/cloudy-weather.jpg"
-        fill={true}
-        className="object-cover"
-        alt="weather background"
-      />
-      {/*Weather container*/}
-      <div className="flex flex-row relative justify-end z-10 h-full text-gray-400">
-        {/*Weather component, hight details */}
-        <div className="flex-grow">{weather && <Weather data={weather} />}</div>
-        <div className="relative backdrop-blur pl-8">
-          <form onSubmit={fetchWeather} className="">
+    <>
+      <Header />
+
+      <div
+        className={`${containerStyle} absolute top-0 left-0 bottom-0 right-0 opacity-0`}
+      >
+        <Image
+          src="/assets/rainy-weather.jpg"
+          fill={true}
+          className="object-cover"
+          alt="weather background"
+        />
+        <div className="flex flex-row relative justify-end z-10 h-full text-gray-400">
+          {/*Weather component, hight details */}
+          <div className={`${styles.mainInfo} flex-grow -translate-x-full`} >
+            {weather && <Weather data={weather} />}
+          </div>
+          <div className={`${styles.aside} relative backdrop-blur pl-8 translate-x-full`}>
             <div className="flex flex-row gap-8">
               <div className="flex items-end">
                 <input
@@ -85,36 +98,53 @@ const Hero = () => {
                 <RiSearchLine size={22} color="#495057" />
               </Button>
             </div>
-          </form>
-          {/*Weather, more information about the current location */}
-          <div className="flex flex-col py-8 pr-8">
-            <h2 className="font-semibold text-gray-50">Weather Details</h2>
-            <div className="flex flex-col gap-4 py-8 border-gray-400 border-b">
-              <div className="flex justify-between">
-                <h3>Cloudy</h3>
-                <span>{weather?.clouds.all}%</span>
-              </div>
-              <div className="flex justify-between">
-                <h3>Humidity</h3>
-                <span>{weather?.main.humidity.toFixed(0)}%</span>
-              </div>
-              <div className="flex justify-between">
-                <h3>Wind</h3>
-                <span>{weather?.wind.speed.toFixed(0)}km/h</span>
-              </div>
-              <div className="flex justify-between">
-                <h3>Temp. Max</h3>
-                <span>{weather?.main.temp_max.toFixed(0)}&#176;</span>
-              </div>
-              <div className="flex justify-between">
-                <h3>Temp. Min</h3>
-                <span>{weather?.main.temp_min.toFixed(0)}&#176;</span>
+
+            {/*Weather, more information about the current location */}
+            <div className="flex flex-col py-8 pr-8">
+              <h2 className="font-semibold text-gray-50">Weather Details</h2>
+              <div className="flex flex-col gap-4 py-8 border-gray-400 border-b">
+                <div className="flex justify-between">
+                  <h3>Cloudy</h3>
+                  <span>{weather?.clouds.all}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <h3>Humidity</h3>
+                  <span>{weather?.main.humidity.toFixed(0)}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <h3>Wind</h3>
+                  <span>{weather?.wind.speed.toFixed(0)}km/h</span>
+                </div>
+                <div className="flex justify-between">
+                  <h3>Temp. Max</h3>
+                  <span>{weather?.main.temp_max.toFixed(0)}&#176;</span>
+                </div>
+                <div className="flex justify-between">
+                  <h3>Temp. Min</h3>
+                  <span>{weather?.main.temp_min.toFixed(0)}&#176;</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Loader className={loaderStyles}>
+        <div>
+          <input
+            type="text"
+            placeholder="Write your location"
+            onChange={(e) => setCity(e.target.value)}
+            className="bg-transparent outline-none w-72 border-b border-gray-500 pb-2 text-gray-400"
+          />
+        </div>
+        <Button
+          className="grid place-content-center cursor-pointer"
+          onClick={handleOnClick}
+        >
+          <RiSearchLine size={22} color="gray" />
+        </Button>
+      </Loader>
+    </>
   );
 };
 export default Hero;
