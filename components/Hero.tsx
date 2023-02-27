@@ -65,7 +65,9 @@ const Hero = () => {
 
   return (
     <>
-      <Header />
+      <div className="absolute z-40 hidden sm:block">
+        <Header />
+      </div>
       <div
         className={`${containerStyle} absolute top-0 left-0 bottom-0 right-0 opacity-0 bg-[url('/assets/rainy-weather.jpg')] bg-cover bg-no-repeat bg-center`}
       >
@@ -129,6 +131,9 @@ const Hero = () => {
                   <span>{weather?.main.temp_min.toFixed(0)}&#176;</span>
                 </div>
               </div>
+            </div>
+            <div className="w-full flex justify-center  z-40">
+              <Header />
             </div>
           </div>
         </div>
