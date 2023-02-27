@@ -108,7 +108,7 @@ const Hero = () => {
 
             {/*Weather, more information about the current location */}
             <div className="flex flex-col py-8 pr-8">
-              <h2 className="font-semibold text-gray-50">Weather Details</h2>
+              <h2 className="font-semibold text-gray-400 text-lg">Weather Details</h2>
               <div className="flex flex-col gap-4 py-8 border-gray-400 border-b">
                 <div className="flex justify-between">
                   <h3>Cloudy</h3>
