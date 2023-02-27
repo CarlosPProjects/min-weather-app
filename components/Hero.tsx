@@ -78,17 +78,21 @@ const Hero = () => {
         />
         <div className="flex flex-row relative justify-end z-10 h-full text-gray-400">
           {/*Weather component, hight details */}
-          <div className={`${styles.mainInfo} flex-grow -translate-x-full`} >
+          <div
+            className={`${styles.mainInfo} flex-grow -translate-x-full sm:block hidden `}
+          >
             {weather && <Weather data={weather} />}
           </div>
-          <div className={`${styles.aside} relative backdrop-blur pl-8 translate-x-full`}>
-            <div className="flex flex-row gap-8">
-              <div className="flex items-end">
+          <div
+            className={`${styles.aside} relative backdrop-blur pl-8 translate-x-full max-sm:absolute top-0 bottom-0 left-0 right-0`}
+          >
+            <div className="flex flex-row justify-between gap-8">
+              <div className="flex items-end flex-grow">
                 <input
                   type="text"
                   placeholder="Another location"
                   onChange={(e) => setCity(e.target.value)}
-                  className="bg-transparent outline-none w-72 border-b border-gray-500 pb-2"
+                  className="bg-transparent outline-none w-full sm:w-72 border-b border-gray-500 pb-2"
                 />
               </div>
               <Button
@@ -97,6 +101,14 @@ const Hero = () => {
               >
                 <RiSearchLine size={22} color="#495057" />
               </Button>
+            </div>
+            {/* Main info, version movil */}
+            <div className="pr-8 sm:hidden">
+              <div
+                className={`${styles.mainInfo} flex-grow -translate-x-full border-b pb-4 border-gray-400`}
+              >
+                {weather && <Weather data={weather} />}
+              </div>
             </div>
 
             {/*Weather, more information about the current location */}

@@ -54,8 +54,8 @@ const Weather: FC<Props> = ({ data }) => {
   }
   return (
     <>
-      <div className="flex items-end h-full p-8">
-        <div className="flex items-end gap-6 p-16">
+      <div className="flex items-end justify-center lg:justify-start h-full max-lg:py-4 lg:p-8 overflow-hidden">
+        <div className="flex flex-col lg:flex-row items-center lg:items-end gap-6 lg:p-16">
           <h1 className="text-8xl">{data.main.temp.toFixed(0)}&#176;</h1>
           <div>
             <h2 className="text-5xl">{data.name}</h2>
