@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <div className="absolute top-0 left-0 z-50">
+    <div className="absolute z-50 max-sm:h-full max-sm:w-full flex items-end justify-center max-sm:py-2">
       <Image
         src="/logo.png"
         width={100}
