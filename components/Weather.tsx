@@ -58,7 +58,7 @@ const Weather: FC<Props> = ({ data }) => {
         <div className="flex flex-col lg:flex-row items-center lg:items-end gap-6 lg:p-16">
           <h1 className="text-8xl">{data.main.temp.toFixed(0)}&#176;</h1>
           <div>
-            <h2 className="text-5xl">{data.name}</h2>
+            <h2 className="text-5xl pb-2">{data.name}</h2>
             <CurrentDay />
           </div>
           <div className="flex flex-col items-center">

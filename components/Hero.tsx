@@ -132,9 +132,6 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full flex justify-center  z-40">
-              <Header />
-            </div>
           </div>
         </div>
       </div>
